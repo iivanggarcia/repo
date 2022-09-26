@@ -1,0 +1,13 @@
+<tr>
+    <th>ID Name</th>
+    <th>ID </th>
+    <th>TITLE</th>
+    <th>Completed</th>
+</tr>
+<tr  *ngFor=" let item of obj">
+    <td> {{item.userId}}</td>
+    <td> {{item.id}}</td>
+    <td> {{item.title}}</td>
+    <td> {{item.completed}}</td>
+    <td><button (click)="llamada(item)">editar</button></td>
+</tr>

@@ -9,12 +9,17 @@ import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DatosService } from './datos.service';
 import { FormularioComponent } from './formulario/formulario.component';
+import { TablaComponent } from './tabla/tabla.component';
+import { EncabezadoComponent } from './encabezado/encabezado.component';
+import { ContenidoTablaComponent } from './contenido-tabla/contenido-tabla.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PrincipalComponent,
-    FormularioComponent
+    FormularioComponent,
+    EncabezadoComponent,
+    ContenidoTablaComponent
   ],
   imports: [
     BrowserModule,
