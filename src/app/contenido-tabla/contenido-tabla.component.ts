@@ -21,5 +21,8 @@ export class ContenidoTablaComponent implements OnInit {
     });
   }
 
+  llamada(dato : any){
+    console.log(dato);
+  }
 
 }
