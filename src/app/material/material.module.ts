@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatSelectModule} from '@angular/material/select';
+import {MatCardModule} from '@angular/material/card';
 
 
 
@@ -11,7 +13,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule
   ],
   exports:[
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatSelectModule,
+    MatCardModule
   ]
 })
 export class MaterialModule { }

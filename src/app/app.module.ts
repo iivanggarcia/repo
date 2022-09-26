@@ -10,6 +10,8 @@ import { DatosService } from './datos.service';
 import { TablaComponent } from './tabla/tabla.component';
 import { EncabezadoComponent } from './encabezado/encabezado.component';
 import { ContenidoTablaComponent } from './contenido-tabla/contenido-tabla.component';
+import { FiltroComponent } from './filtro/filtro.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,13 +19,15 @@ import { ContenidoTablaComponent } from './contenido-tabla/contenido-tabla.compo
     PrincipalComponent,
     TablaComponent,
     EncabezadoComponent,
-    ContenidoTablaComponent
+    ContenidoTablaComponent,
+    FiltroComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [DatosService],
   bootstrap: [AppComponent]
