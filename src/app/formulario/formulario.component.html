@@ -1,0 +1,14 @@
+<form (submit)="pasarInfo()" class="formularioFondo">
+    <mat-form-field appearance="fill">
+        <mat-label>Titulo</mat-label>
+        <input matInput name="titulo" placeholder="Ex. Pizza" [(ngModel)] = "this.tareaAModificar.titulo">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Estado</mat-label>
+        <input matInput name="estado" placeholder="Ex. Pizza" [(ngModel)] = "estadoCadena">
+    </mat-form-field>
+
+    <button type="button" (click)="cambiarBandera()" mat-button color="primary">Cancelar</button>
+    <button type="submit" mat-button color="warn">Guardar</button>
+</form>
