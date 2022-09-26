@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Tarea } from '../interfaces/TareaI';
 
 @Component({
@@ -8,39 +9,30 @@ import { Tarea } from '../interfaces/TareaI';
 })
 export class FormularioComponent implements OnInit {
 
-  constructor() {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
-  tareaAModificar: Tarea = {
-    id: 0,
-    titulo: "Hola",
-    estado: false
-  }
+  objAux:any
 
   estadoCadena:string = "";
 
   bandera: boolean = true
 
   ngOnInit(): void {
-      
+    this.objAux={...this.data}
+    if(this.data.completed == false){
+      this.estadoCadena = "pendiente"
+      return
+    }
+    this.estadoCadena = "completada"
   }
 
-  cambiarBandera(){
-    if(this.bandera){
-      this.bandera = false
-    }else{
-      this.bandera = true
-    }
+  cancelarAccion(){
+    return undefined;
   }
 
   pasarInfo() {
-    if(this.tareaAModificar.titulo == ""){
-      console.log("Ingresa un titulo valido")
-      return
-    }
-    if(this.estadoCadena == "completado" || this.estadoCadena == "pendiente"){
-      //Aqui se hace el envío de la información
-      console.log("Enviando la información");
-    }
 
   }
 

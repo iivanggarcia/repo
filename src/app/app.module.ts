@@ -19,7 +19,8 @@ import { ContenidoTablaComponent } from './contenido-tabla/contenido-tabla.compo
     PrincipalComponent,
     FormularioComponent,
     EncabezadoComponent,
-    ContenidoTablaComponent
+    ContenidoTablaComponent,
+    TablaComponent 
   ],
   imports: [
     BrowserModule,
