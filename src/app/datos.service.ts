@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, elementAt, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +9,9 @@ export class DatosService {
 
   url = "https://jsonplaceholder.typicode.com/todos";
   datosJson$ = new BehaviorSubject<any>(undefined);
+  auxDatos : any;
+  newitem : any;
+  huboCambios : any;
 
   constructor(private http: HttpClient) { }
 
@@ -16,7 +19,9 @@ export class DatosService {
     return this.http.get(this.url).pipe(
       map((obj : any) => {
         obj.sort((a: any, b: any) => (a.title < b.title ? -1 : 1));
-        console.log(obj);
+        this.auxDatos = obj;
+        this.grabarLocalStorage();
+        console.log(this.auxDatos);
         return obj;
       })
     );
@@ -30,5 +35,17 @@ export class DatosService {
     this.peticion().subscribe((datos : any) => {
       this.setArr$(datos);
     })
+  }
+
+  grabarLocalStorage(){
+    localStorage.setItem("json", JSON.stringify(this.auxDatos));
+  }
+
+  obtenerLocalStorage(){
+    let aux = JSON.parse(localStorage.getItem("json"));
+  }
+
+  comparar(){
+    let actualElement = this.auxDatos.find( element => element.id == this.newitem.id);
   }
 }

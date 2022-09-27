@@ -19,7 +19,6 @@ export class ContenidoTablaComponent implements OnInit {
     this.servicio.datosJson$.subscribe((datos : any) => {
       if(datos == undefined) return;
       this.obj = datos;
-      console.log(datos);  
     });
   }
 
@@ -30,7 +29,8 @@ export class ContenidoTablaComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe( result => {
-      console.log(result);
+      this.servicio.newitem = result;
+      console.log(this.servicio.newitem);
     })
   }
 
