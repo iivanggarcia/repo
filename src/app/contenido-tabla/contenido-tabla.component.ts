@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs';
 import { DatosService } from '../datos.service';
 import { ServicioFiltroService } from '../servicio-filtro.service';
+import { MatDialog } from '@angular/material/dialog';
+import { FormularioComponent } from '../formulario/formulario.component';
+
 
 @Component({
   selector: 'app-contenido-tabla',
@@ -13,7 +16,7 @@ export class ContenidoTablaComponent implements OnInit {
   obj: any;
   aux : any;
 
-  constructor(private servicio: DatosService, private filtroservicio: ServicioFiltroService) { }
+  constructor(private servicio: DatosService, private filtroservicio: ServicioFiltroService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.servicio.inicializar();
@@ -43,5 +46,15 @@ export class ContenidoTablaComponent implements OnInit {
     })
   }
 
+  llamada(data : any){
+    const dialogRef = this.dialog.open(FormularioComponent, {
+      data,
+      width: "600px"
+    });
+
+    dialogRef.afterClosed().subscribe( result => {
+      console.log(result);
+    })
+  }
 
 }
