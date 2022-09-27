@@ -16,9 +16,25 @@ export class ContenidoTablaComponent implements OnInit {
 
   ngOnInit(): void {
     this.servicio.inicializar();
-    this.servicio.datosJson$.subscribe((datos : any) => {
-      if(datos == undefined) return;
-      this.obj = datos;
+    /*if(!this.servicio.huboCambios){
+      this.servicio.peticion().subscribe((datos : any) => {
+        if(datos == undefined) return;
+        this.obj = datos;
+      });
+    }
+    else{
+      this.obj = this.servicio.obtenerJsonLocalStorage();
+    }*/
+    this.servicio.cambio$.subscribe((datos : any) => {
+      if(!this.servicio.huboCambios){
+          console.log(this.servicio.huboCambios);
+          if(datos == undefined) return;
+          this.obj = datos;
+      }
+      else{
+        console.log(this.servicio.huboCambios);
+        this.obj = this.servicio.obtenerJsonLocalStorage();
+      }
     });
   }
 
@@ -30,7 +46,7 @@ export class ContenidoTablaComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe( result => {
       this.servicio.newitem = result;
-      console.log(this.servicio.newitem);
+      this.servicio.comparar();
     })
   }
 

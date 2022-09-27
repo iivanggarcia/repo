@@ -8,10 +8,11 @@ import { BehaviorSubject, elementAt, map, Observable } from 'rxjs';
 export class DatosService {
 
   url = "https://jsonplaceholder.typicode.com/todos";
-  datosJson$ = new BehaviorSubject<any>(undefined);
+  cambio$ = new BehaviorSubject<any>(undefined);
   auxDatos : any;
   newitem : any;
-  huboCambios : any;
+  huboCambios :boolean = false;
+  i = 0;
 
   constructor(private http: HttpClient) { }
 
@@ -19,33 +20,64 @@ export class DatosService {
     return this.http.get(this.url).pipe(
       map((obj : any) => {
         obj.sort((a: any, b: any) => (a.title < b.title ? -1 : 1));
-        this.auxDatos = obj;
-        this.grabarLocalStorage();
-        console.log(this.auxDatos);
+        if(localStorage.getItem("json") == null){
+          this.auxDatos = obj;
+          this.grabarLocalStorage();
+        }
+        else{
+          this.auxDatos = this.inicializacionDesdeLocalStorage();
+        }
         return obj;
       })
     );
   }
 
+  inicializacionDesdeLocalStorage(){
+          if((localStorage.getItem("cambios") || '{}') == '{}'){
+            localStorage.setItem("cambios", ""+this.huboCambios);
+          }
+          else{
+            this.huboCambios = this.obtenerCambiosLocalStorage();
+          }
+
+          return this.obtenerJsonLocalStorage();
+
+  }
+
   setArr$(val: any) {
-    this.datosJson$.next(val);
+    this.cambio$.next(val);
   }
 
   inicializar() {
     this.peticion().subscribe((datos : any) => {
+      this.i++;
+      console.log(this.i);
       this.setArr$(datos);
     })
   }
 
   grabarLocalStorage(){
     localStorage.setItem("json", JSON.stringify(this.auxDatos));
+    
   }
 
-  obtenerLocalStorage(){
-    let aux = JSON.parse(localStorage.getItem("json"));
+  obtenerJsonLocalStorage(){
+    let aux = JSON.parse(localStorage.getItem("json") || '{}');
+    return aux;
+  }
+
+  obtenerCambiosLocalStorage(){
+    let aux = JSON.parse(localStorage.getItem("cambios") || '{}');
+    return aux;
   }
 
   comparar(){
-    let actualElement = this.auxDatos.find( element => element.id == this.newitem.id);
+    this.huboCambios = true;
+    this.auxDatos.splice(this.auxDatos.indexOf(this.auxDatos.find( (element: { id: any; }) => element.id == this.newitem.id)),1);
+    this.auxDatos.push(this.newitem);
+    this.auxDatos.sort((a: any, b: any) => (a.title < b.title ? -1 : 1));
+    this.grabarLocalStorage();
+    localStorage.setItem("cambios", ""+this.huboCambios);
+    this.setArr$("cambio");
   }
 }
