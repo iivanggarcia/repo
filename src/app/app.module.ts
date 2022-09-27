@@ -12,6 +12,8 @@ import { FormularioComponent } from './formulario/formulario.component';
 import { TablaComponent } from './tabla/tabla.component';
 import { EncabezadoComponent } from './encabezado/encabezado.component';
 import { ContenidoTablaComponent } from './contenido-tabla/contenido-tabla.component';
+import { FiltroComponent } from './filtro/filtro.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { ContenidoTablaComponent } from './contenido-tabla/contenido-tabla.compo
     FormularioComponent,
     EncabezadoComponent,
     ContenidoTablaComponent,
+    FiltroComponent,
     TablaComponent 
   ],
   imports: [

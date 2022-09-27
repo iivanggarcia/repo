@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { map } from 'rxjs';
 import { DatosService } from '../datos.service';
+import { ServicioFiltroService } from '../servicio-filtro.service';
+import { MatDialog } from '@angular/material/dialog';
 import { FormularioComponent } from '../formulario/formulario.component';
+
 
 @Component({
   selector: 'app-contenido-tabla',
@@ -10,17 +13,37 @@ import { FormularioComponent } from '../formulario/formulario.component';
 })
 export class ContenidoTablaComponent implements OnInit {
 
-  obj : any;
+  obj: any;
+  aux : any;
 
-  constructor(private servicio: DatosService, private dialog: MatDialog) { }
+  constructor(private servicio: DatosService, private filtroservicio: ServicioFiltroService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.servicio.inicializar();
-    this.servicio.datosJson$.subscribe((datos : any) => {
-      if(datos == undefined) return;
+    this.servicio.datosJson$.subscribe((datos: any) => {
+      if (datos == undefined) return;
       this.obj = datos;
-      console.log(datos);  
+      this.aux = datos;
     });
+
+    // servicio filtro
+    this.filtroservicio.getestatus().subscribe((item: any) => {
+      if (item == undefined) return;
+
+      this.aux = this.obj.filter((tarea: any) => {
+        console.log("item", item)
+        console.log("tarea", tarea.id)
+        if (item === 'false' && tarea.completed === false)
+          return tarea;
+
+        if (item === 'true' && tarea.completed === true)
+          return tarea;
+
+        if (item === 'all')
+          return tarea;
+      })
+      
+    })
   }
 
   llamada(data : any){
