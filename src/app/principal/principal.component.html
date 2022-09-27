@@ -1,2 +1,4 @@
-<app-filtro></app-filtro>
-<app-tabla></app-tabla>
+<mat-card>
+  <app-filtro (cambios)="transmicion($event)"></app-filtro>
+  <app-tabla></app-tabla>
+</mat-card>

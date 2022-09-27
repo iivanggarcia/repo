@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-filtro',
@@ -8,13 +8,15 @@ import { Component, OnInit } from '@angular/core';
 export class FiltroComponent implements OnInit {
 
   constructor() { }
-  eleccion:any;
 
+  @Output() cambios = new EventEmitter <string> ();
+
+  eleccion:any;
   ngOnInit(): void {
   }
 
   filtro(){
-    console.log(this.eleccion)
+    this.cambios.emit(this.eleccion);
   }
 
 }
