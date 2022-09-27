@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DatosService } from '../datos.service';
+import { ServicioFiltroService } from '../servicio-filtro.service';
 
 @Component({
   selector: 'app-principal',
@@ -9,15 +9,15 @@ import { DatosService } from '../datos.service';
 export class PrincipalComponent implements OnInit {
   obj : any;
 
-  constructor(private servicio: DatosService) { }
+  constructor(private serviciofiltro : ServicioFiltroService) { }
 
   ngOnInit(): void {
-    this.servicio.inicializar();
-    this.servicio.datosJson$.subscribe((datos : any) => {
-      if(datos == undefined) return;
-      this.obj = datos;
-      
-    });
+   
   }
 
+  transmicion(event:string){
+
+    this.serviciofiltro.setestatus(event);
+    
+  }
 }

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ContenidoTablaComponent } from './contenido-tabla.component';
+import { EncabezadoComponent } from './encabezado.component';
 
-describe('ContenidoTablaComponent', () => {
-  let component: ContenidoTablaComponent;
-  let fixture: ComponentFixture<ContenidoTablaComponent>;
+describe('EncabezadoComponent', () => {
+  let component: EncabezadoComponent;
+  let fixture: ComponentFixture<EncabezadoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContenidoTablaComponent ]
+      declarations: [ EncabezadoComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ContenidoTablaComponent);
+    fixture = TestBed.createComponent(EncabezadoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
